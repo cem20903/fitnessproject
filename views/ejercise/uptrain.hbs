@@ -1,70 +1,94 @@
-<form action="/add-train">
+<form action="/add-train" method="POST" id="formAdd">
 
-<select name="ejercise" id="ejercise">
-  <option value="dominadas">Dominadas</option>
-   <option value="pressBanca">Press Banca</option>
+  <select id="ejercise">
+    <option value="dominadas">Dominadas</option>
+    <option value="pressBanca">Press Banca</option>
     <option value="pressMilitar">Press Militar</option>
-      <option value="velocidad">Velocidad</option>
-      <option value="resistencia">Resistencia Musculuar</option>
-      <option value="aerobica">Resistencia Aerobica</option>
+    <option value="sentadilla">Sentadilla</option>
+    <option value="pesomuerto">Peso muerto</option>
+    <option value="velocidad">Velocidad</option>
+    <option value="resistencia">Resistencia Muscular</option>
+    <option value="aerobica">Resistencia Aerobica</option>
 
-</select>
+  </select>
 
-<div id="train"></div>
-<input type="button" name="insert" id="insert" value="Insert">
-<input type="button" value="Send">
+  <div id="train"></div>
+  <input type="button" name="insert" id="insert" value="Insert">
+  <input type="submit" value="Send">
 </form>
 
 <script>
 
-let select = document.getElementById('ejercise')
-let insert = document.getElementById('insert')
-let train = document.getElementById('train')
+  let select = document.getElementById('ejercise')
+  let insert = document.getElementById('insert')
+  let formAdd = document.getElementById('formAdd')
 
-insert.addEventListener('click',(e)=>{
+  insert.addEventListener('click', (e) => {
 
-let title = document.createElement('p')
-  title.innerHTML = select.value
-  train.appendChild(title)
-  
- if(select.value === "velocidad"){
-   
+    let title = document.createElement('p')
+    title.innerHTML = select.value
+    title.name = select.value
+    formAdd.appendChild(title)
+    let parameter1 = document.createElement('input')
+    parameter1.className = select.value
+     parameter1.name = select.value
+    parameter1.size = 2
 
-   let nameParameter1 = document.createElement('strong')
-  nameParameter1.innerHTML = "Tiempo: "
-   train.appendChild(nameParameter1) 
+    let repText = document.createElement('strong')
 
+    parameter1.className = "peso"
+    let repes = document.createElement('input')
+    repes.className = select.value
+    repes.name = select.value
 
- } else {
-
-  let nameParameter1 = document.createElement('strong')
-  nameParameter1.innerHTML = "Peso: "
-
-  let parameter1 = document.createElement('input')
-  parameter1.className = select.value 
-  parameter1.size = 2
-  parameter1.className = "peso"
-  let repes = document.createElement('input')
-  repes.className = select.value 
-  repes.className = "repeticiones"
-  repes.size = 10
+    if (select.value === "velocidad") {
 
 
-  
-  let repText = document.createElement('strong')
-  repText.innerHTML = " Repeticiones: "
+      let nameParameter1 = document.createElement('strong')
+      nameParameter1.innerHTML = "Tiempo: "
+      formAdd.appendChild(nameParameter1)
+      parameter1.className = "tiempo"
+      formAdd.appendChild(parameter1)
+      repText.innerHTML = " Metros: "
+      formAdd.appendChild(repText)
+      formAdd.appendChild(repes)
+
+    } else if (select.value === "aerobica") {
+
+      let nameParameter1 = document.createElement('strong')
+      nameParameter1.innerHTML = "Tiempo: "
+      formAdd.appendChild(nameParameter1)
+      parameter1.className = "tiempo"
+      parameter1.name = "tiempo"
+      formAdd.appendChild(parameter1)
+      repText.innerHTML = " Kilometros: "
+      formAdd.appendChild(repText)
+      formAdd.appendChild(repes)
+
+    } else {
+
+      let nameParameter1 = document.createElement('strong')
+      nameParameter1.innerHTML = "Peso: "
+
+      repes.className = "repeticiones"
+      repes.name = "r" + select.value
+      repes.size = 10
 
 
- train.appendChild(nameParameter1) 
- train.appendChild(parameter1)
- train.appendChild(repText)
- train.appendChild(repes)
- }
- 
+
+      repText.innerHTML = " Repeticiones: "
+
+
+      formAdd.appendChild(nameParameter1)
+      formAdd.appendChild(parameter1)
+      formAdd.appendChild(repText)
+      formAdd.appendChild(repes)
+    }
 
 
 
-})
+
+  })
 
 
 </script>

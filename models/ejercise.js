@@ -1,17 +1,15 @@
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema;
 
+const ejerciseSchema = Schema({
 
-
-
-const ejerciseSchema = {
-
-userId: ObjectId,
+userid: String,
 ejercise: Object
-}
-
-
-
-
-
+})
 
 
 const Ejercise = new mongoose.model('ejercise',ejerciseSchema)
+
+
+
+module.exports = Ejercise
