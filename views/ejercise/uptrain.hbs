@@ -1,0 +1,70 @@
+<form action="/add-train">
+
+<select name="ejercise" id="ejercise">
+  <option value="dominadas">Dominadas</option>
+   <option value="pressBanca">Press Banca</option>
+    <option value="pressMilitar">Press Militar</option>
+      <option value="velocidad">Velocidad</option>
+      <option value="resistencia">Resistencia Musculuar</option>
+      <option value="aerobica">Resistencia Aerobica</option>
+
+</select>
+
+<div id="train"></div>
+<input type="button" name="insert" id="insert" value="Insert">
+<input type="button" value="Send">
+</form>
+
+<script>
+
+let select = document.getElementById('ejercise')
+let insert = document.getElementById('insert')
+let train = document.getElementById('train')
+
+insert.addEventListener('click',(e)=>{
+
+let title = document.createElement('p')
+  title.innerHTML = select.value
+  train.appendChild(title)
+  
+ if(select.value === "velocidad"){
+   
+
+   let nameParameter1 = document.createElement('strong')
+  nameParameter1.innerHTML = "Tiempo: "
+   train.appendChild(nameParameter1) 
+
+
+ } else {
+
+  let nameParameter1 = document.createElement('strong')
+  nameParameter1.innerHTML = "Peso: "
+
+  let parameter1 = document.createElement('input')
+  parameter1.className = select.value 
+  parameter1.size = 2
+  parameter1.className = "peso"
+  let repes = document.createElement('input')
+  repes.className = select.value 
+  repes.className = "repeticiones"
+  repes.size = 10
+
+
+  
+  let repText = document.createElement('strong')
+  repText.innerHTML = " Repeticiones: "
+
+
+ train.appendChild(nameParameter1) 
+ train.appendChild(parameter1)
+ train.appendChild(repText)
+ train.appendChild(repes)
+ }
+ 
+
+
+
+})
+
+
+</script>

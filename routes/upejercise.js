@@ -2,11 +2,10 @@ const express = require('express');
 const router  = express.Router();
 
 /* GET home page */
-router.get('/', (req, res, next) => {
-  res.render('index');
+router.get('/upejercise', (req, res, next) => {
+  res.render('ejercise/uptrain')
 });
 
 router.use('/', require('./auth'));
-router.use('/', require('./upejercise'));
 
 module.exports = router;
