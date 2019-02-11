@@ -11,13 +11,13 @@
     <option value="aerobica">Resistencia Aerobica</option>
 
   </select>
-
-  <div id="train"></div>
   <input type="button" name="insert" id="insert" value="Insert">
-  <input type="submit" value="Send">
+  <input type="submit" value="Send" id="send">
 </form>
 
 <script>
+
+
 
   let select = document.getElementById('ejercise')
   let insert = document.getElementById('insert')
@@ -25,21 +25,27 @@
 
   insert.addEventListener('click', (e) => {
 
+    let inputs = document.getElementsByTagName('input')
+
     let title = document.createElement('p')
     title.innerHTML = select.value
     title.name = select.value
     formAdd.appendChild(title)
     let parameter1 = document.createElement('input')
+    parameter1.value = 0
     parameter1.className = select.value
-     parameter1.name = select.value
+
+     parameter1.name = select.value + String(inputs.length-2)
     parameter1.size = 2
 
     let repText = document.createElement('strong')
 
     parameter1.className = "peso"
     let repes = document.createElement('input')
-    repes.className = select.value
-    repes.name = select.value
+    repes.className = select.value 
+    repes.name = select.value + String(inputs.length-2)
+    repes.value = 0
+     let nameParameter1 = document.createElement('strong')
 
     if (select.value === "velocidad") {
 
@@ -59,26 +65,19 @@
       nameParameter1.innerHTML = "Tiempo: "
       formAdd.appendChild(nameParameter1)
       parameter1.className = "tiempo"
-      parameter1.name = "tiempo"
+      parameter1.name = "aerobica" + String(inputs.length-2)
       formAdd.appendChild(parameter1)
       repText.innerHTML = " Kilometros: "
       formAdd.appendChild(repText)
       formAdd.appendChild(repes)
 
     } else {
-
-      let nameParameter1 = document.createElement('strong')
+     
       nameParameter1.innerHTML = "Peso: "
-
       repes.className = "repeticiones"
-      repes.name = "r" + select.value
+      repes.name = select.value + String(inputs.length-2)
       repes.size = 10
-
-
-
       repText.innerHTML = " Repeticiones: "
-
-
       formAdd.appendChild(nameParameter1)
       formAdd.appendChild(parameter1)
       formAdd.appendChild(repText)
@@ -86,7 +85,10 @@
     }
 
 
+  if (select.value === "resistencia") {
 
+    nameParameter1.innerHTML = "Tiempo: "
+  }
 
   })
 

@@ -3,14 +3,7 @@ const router  = express.Router();
 const ejerciseModel = require("../models/ejercise")
 const mongoose = require('mongoose')
 
-mongoose
-  .connect('mongodb://localhost/fitnessproject', {useNewUrlParser: true})
-  .then(x => {
-    console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
-  })
-  .catch(err => {
-    console.error('Error connecting to mongo', err)
-  });
+
 
 /* GET home page */
 router.get('/upejercise', (req, res, next) => {
@@ -20,19 +13,33 @@ router.get('/upejercise', (req, res, next) => {
 
 router.post('/add-train',(req,res,next)=>{
 
+  let array = []
   const ejercises = req.body
+  console.log(req.user)
 
-  
+for (const nom in ejercises) {
 
-  ejerciseModel.create({userid: "1234", ejercise: ejercises})
+ let nombre = nom.replace(/[0-9]/g, '');
+  array.push({userid: req.user, ejercise: {[nombre]: ejercises[nom]}})
+
+}
+
+console.log(array)
+
+  ejerciseModel.insertMany(array)
   .then((bien)=>{
-
-    console.log(bien)
-
+    console.log("bien")
   })
 .catch(err=>{
   console.log(err)
 })
+
+
+// a = 1
+// b = 2
+// c = 3
+
+
 
 
 })
