@@ -8,7 +8,7 @@ passport.use("local", new LocalStrategy({
     passwordField: 'password'
   }, 
   (username, password, done) => {
-    User.findOne({$or:[{ username },{email:username}]})
+    User.findOne({$or:[{ username },{email: username}]})
     .then(foundUser => {
       if (!foundUser) {
         done(null, false, { message: 'Incorrect username' });
