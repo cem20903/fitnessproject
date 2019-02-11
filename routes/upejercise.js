@@ -19,7 +19,7 @@ router.get('/upejercise', (req, res, next) => {
 
 
 router.post('/add-train',(req,res,next)=>{
-
+  console.log(req.body)
   const ejercises = req.body
 
   
