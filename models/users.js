@@ -8,7 +8,7 @@ const userSchema = Schema({
   practicSport: Array,
   training: String,
   groups: Array,
-  ejercise: Array
+  ejercise: [{type: Schema.Types.ObjectId, ref:"ejercise" }]
 })
 
 
