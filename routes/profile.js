@@ -29,19 +29,9 @@ router.get("/searchRanKing", (req,res,next) => {
   res.send("hola")
 })
 
-router.get("/groups", (req,res,next) => {
-  // Group.find()
-  // .then(groups => {
-    
-  // })
-  // .catch(err => console.log(err))
-  // res.render("profile/groups")
-})
-router.post("/groups", (req,res,next) => {
-  res.render("profile/groups")
-})
-router.put("/groups", (req,res,next) => {
-  res.render("profile/groups")
+router.get('/evolution',(req,res,next)=>{
+
+  res.render('profile/evolution')
 })
 
 module.exports = router;

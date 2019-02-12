@@ -9,5 +9,7 @@ router.get('/', (req, res, next) => {
 router.use('/', require('./auth'));
 router.use('/', require('./upejercise'));
 router.use('/profile', require('./profile'));
+router.use('/group', require('./groups'));
+router.use('/',require('./evolution'))
 
 module.exports = router;

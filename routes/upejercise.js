@@ -15,20 +15,18 @@ router.post('/add-train',(req,res,next)=>{
 
   let array = []
   const ejercises = req.body
-  console.log(req.user)
 
 for (const nom in ejercises) {
 
  let nombre = nom.replace(/[0-9]/g, '');
-  array.push({userid: req.user, ejercise: {[nombre]: ejercises[nom]}})
+  array.push({userid: req.user.id, ejercise: {[nombre]: ejercises[nom]}})
 
 }
 
-console.log(array)
-
   ejerciseModel.insertMany(array)
   .then((bien)=>{
-    console.log("bien")
+    let message = "Entrenamiento subido con exito"
+    res.render('profile/info',{message})
   })
 .catch(err=>{
   console.log(err)

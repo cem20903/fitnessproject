@@ -1,0 +1,97 @@
+<h2>Evolution</h2>
+
+
+From: <input id="datefrom" type="date" name="from"> To:<input id="dateto" type="date" name="to">
+ <select id="disciplina">
+    <option value="dominadas">Dominadas</option>
+    <option value="pressBanca">Press Banca</option>
+    <option value="pressMilitar">Press Militar</option>
+    <option value="sentadilla">Sentadilla</option>
+    <option value="pesomuerto">Peso muerto</option>
+    <option value="velocidad">Velocidad</option>
+    <option value="resistencia">Resistencia Muscular</option>
+    <option value="aerobica">Resistencia Aerobica</option>
+  </select>
+
+<button id="dates">Aceptar</button>
+
+
+<canvas id="chart" width="400" height="100"></canvas>
+
+
+
+<script>
+const button = document.getElementById('dates')
+
+  var array1 = [];
+  var array2 = [];
+button.onclick = ()=>{
+
+  const dateFrom = document.getElementById('datefrom').value
+  const dateTo = document.getElementById('dateto').value
+  const disciplina = document.getElementById('disciplina').value
+
+let newDateTo = dateTo + " 23:59:59"
+
+axios.get(`/info?dateto=${newDateTo}&datefrom=${dateFrom}&disciplina=${disciplina}`)
+.then((data)=>{
+  const datos = data.data
+
+ array1 = []
+ array2 = []
+
+
+datos.forEach(elemento =>{
+  if(elemento.ejercise[disciplina][1] == "1"){
+    array1.push(parseInt(elemento.ejercise[disciplina][0]))
+    array2.push(elemento.date.split("T")[0])
+  }
+})
+
+pintarChart(array1,array2)
+
+})
+.catch((err)=>{
+  console.log(err)
+})
+
+
+function pintarChart(array1,array2){
+
+var ctx = document.getElementById("chart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: array2,
+        datasets: [{
+            label: 'Peso Max',
+            data: array1,
+            backgroundColor: [
+                'rgba(155, 99, 132, 0.2)'
+            ],
+            borderColor: [
+                'rgba(155,99,132,1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+}
+}
+
+
+
+</script>
+
+
+
+

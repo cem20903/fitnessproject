@@ -1,10 +1,12 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
+var DateOnly = require('mongoose-dateonly')(mongoose);
 
 const ejerciseSchema = Schema({
 
 userid: String,
-ejercise: Object
+ejercise: Object,
+date: { type: Date, default: Date.now }
 })
 
 

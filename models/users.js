@@ -8,12 +8,10 @@ const userSchema = Schema({
   practicSport: Array,
   training: String,
   groups: Array,
-  ejercise: [{type: Schema.Types.ObjectId, ref:"ejercise" }]
+  ejercise: [{type: Schema.Types.ObjectId, ref:"Ejercise" }]
 })
 
 
-
 const User = new mongoose.model('user',userSchema)
-
 
 module.exports = User
