@@ -24,9 +24,15 @@ router.post("/login", passport.authenticate("local", {
 
 router.post('/signup', (req, res, next) => {
   const hash = bcrypt.hashSync(req.body.password, salt);
-  User.create({username:req.body.name,email:req.body.email,password: hash})
+  User.create({username:req.body.username,email:req.body.email,password: hash})
   .then(user => res.redirect("/login"))
   .catch(err=> console.log(err))
+});
+
+
+router.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
 });
 
 module.exports = router;

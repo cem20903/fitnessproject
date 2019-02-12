@@ -1,0 +1,13 @@
+{{#each groups}}
+  <div>
+    {{this.name}}
+    {{#if this.user}}
+      <a href="/group/del/{{this._id}}">Exit group</a>
+    {{else}}
+      <a href="/group/add/{{this._id}}">Enter group</a>
+    {{/if}}
+    <a href="/group/info/{{this._id}}">Info</a>
+    
+  </div>
+{{/each}}
+<div><a href="/group/new">New group</a></div> 
