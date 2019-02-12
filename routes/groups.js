@@ -39,10 +39,7 @@ router.get("/del/:id", (req,res,next) => {
 router.get("/info/:id",(req,res,next)=>{
   
   User.find({groups:req.params.id})
-  .then(users => {
-    console.log(users)
-    res.render("group/info",{users})
-  })
+  .then(users => res.render("group/info",{users}))
   .catch(err => console.log(err))
 
 })
