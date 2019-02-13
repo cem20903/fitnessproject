@@ -26,13 +26,21 @@ router.post("/new", (req,res,next) => {
   .catch(err => console.log(err))
 })
 router.get("/add/:id", (req,res,next) => {
-  User.findByIdAndUpdate(req.user.id,{$push:{groups:req.params.id}})
-  .then(user => res.redirect("/group"))
+  Group.findByIdAndUpdate(req.params.id,{$push:{members:req.user.id}})
+  .then(groups => {
+    User.findByIdAndUpdate(req.user.id,{$push:{groups:req.params.id}})
+    .then(user => res.redirect("/group"))
+    .catch(err => console.log(err))
+  })
   .catch(err => console.log(err))
 })
 router.get("/del/:id", (req,res,next) => {
-  User.findByIdAndUpdate(req.user.id,{$pull:{groups:req.params.id}})
-  .then(user => res.redirect("/group"))
+  Group.findByIdAndUpdate(req.params.id,{$pull:{members:req.user.id}})
+  .then(groups => {
+    User.findByIdAndUpdate(req.user.id,{$pull:{groups:req.params.id}})
+    .then(user => res.redirect("/group"))
+    .catch(err => console.log(err))
+  })
   .catch(err => console.log(err))
 })
 
