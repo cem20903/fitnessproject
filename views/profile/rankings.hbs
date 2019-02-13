@@ -5,15 +5,26 @@
     <option id="{{this._id}}" value="{{this._id}}">{{this.name}}</option>
   {{/each}}
 </select>
+<select id="ejercise" onchange="findGroup()">
+  <option value="dominadas">Dominadas</option>
+  <option value="pressBanca">Press Banca</option>
+  <option value="pressMilitar">Press Militar</option>
+  <option value="sentadilla">Sentadilla</option>
+  <option value="pesomuerto">Peso muerto</option>
+  <option value="velocidad">Velocidad</option>
+  <option value="resistencia">Resistencia Muscular</option>
+  <option value="aerobica">Resistencia Aerobica</option>
+</select>
 <script>
   function findGroup(){
-    let select = document.getElementById('rankingSelector')
-    let groupId = select.value;
-    axios.get(`/profile/searchRanking?id=${groupId}`)
+    let selG = document.getElementById('rankingSelector')
+    let selE = document.getElementById('ejercise')
+    let groupId = selG.value;
+    let ejType = selE.value;
+    axios.get(`/profile/searchRanking?id=${groupId}&type=${ejType}`)
     .then((data)=>{
-        console.log(data)
+        console.log(data.data)
         const datos = data.data
-
     })
     .catch((err)=>{
       console.log(err)
