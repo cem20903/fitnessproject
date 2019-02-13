@@ -16,24 +16,29 @@ router.get('/rankings', (req, res, next) => {
 
 router.get("/searchRanKing", (req,res,next) => {
   let findId = {}
-  console.log("--------------");
-  console.log(req.query);
+  let sort1 = `ejercise.${req.query.type}.1` 
   if(req.query && req.query.id != "global") findId = {groups: req.query.id}
   User.find(findId)
   .then(users =>{
     const arrUsers = users.map(elem => elem._id)
-    Ejercise.find({userid:{$in:arrUsers}},{},{sort:{"ejercise.dominadas.1":-1}})
-    .then(ejer => console.log(JSON.stringify(ejer)))
-
-    // const dominadas = users.map(a=>a)
-    // console.log(dominadas[1].ejercise);
-    // for(var d = 0; d < dominadas.length; d++){
-    //   dominadas[d].ejercise.sort(ejercise.dominada);
-    // }
-    // dominadas.sort(ejercise[0].ejercise.dominada);
-    // console.log(users)
-    // res.json(dominadas)
-    res.send("hola")
+    let findE = `ejercise.${req.query.type}`
+    let resArr = [];
+    Ejercise.find({$and:[{userid:{$in:arrUsers}},{[findE]:{$exists:true}}]},{},{sort:{[sort1]:-1}})
+    .then(ejer => {
+      let checkIds = []
+      ejer.forEach(elem => {
+        if(checkIds.indexOf(elem.userid) == -1){
+          for(var j = 0; j < users.length; j++){
+            if(users[j]._id == elem.userid){
+              checkIds.push(elem.userid)
+              resArr.push({name: users[j].username, userId: elem.userid, ejer: elem.ejercise})
+            }
+          }
+        }
+      })
+      res.json(resArr);
+    })
+    .catch(err => console.log(err))
   })
   .catch(err => console.log(err))
 })

@@ -43,6 +43,3 @@ if(ejercises[nom][0].indexOf(":") != -1){
 })
 
 module.exports = router;
-
-// {$push:{ejercise:{$each:['5c62f162bf9e974cf9fb7d69','5c62f162bf9e974cf9fb7d6a']}}}
-// 5c62f162bf9e974cf9fb7d6b,5c62f162bf9e974cf9fb7d6c
