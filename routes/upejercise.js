@@ -12,13 +12,26 @@ router.post('/add-train',(req,res,next)=>{
   const ejercises = req.body
 
   for (const nom in ejercises) {
-    let nombre = nom.replace(/[0-9]/g, '');
-    array.push({userid: req.user.id, ejercise: {[nombre]: ejercises[nom]}})
-  }
 
+    
+    //Al nombre le quito el numero
+    let nombre = nom.replace(/[0-9]/g, '');
+    if(nombre == "aerobica"){
+// tiempo
+if(ejercises[nom][0].indexOf(":") != -1){
+
+  ejercises[nom][0] = +ejercises[nom][0].replace(":",".")
+  ejercises[nom][1] = +ejercises[nom][1]
+ console.log(ejercises[nom])
+    }
+  }
+    array.push({userid: req.user.id, ejercise: {[nombre]: ejercises[nom]}})
+  
+  }
   ejerciseModel.insertMany(array)
   .then((ejercises)=>{
     const arrEj = ejercises.map(elem => elem._id)
+
     User.findByIdAndUpdate(req.user._id,{$push:{ejercise:{$each:arrEj}}})
     .then(user => {
       let message = "Entrenamiento subido con exito"

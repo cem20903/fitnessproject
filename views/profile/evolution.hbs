@@ -1,3 +1,7 @@
+
+{{> menu}}
+
+
 <h2>Evolution</h2>
 
 
@@ -27,6 +31,8 @@ const button = document.getElementById('dates')
   var array2 = [];
 button.onclick = ()=>{
 
+  let leyenda = ""
+
   const dateFrom = document.getElementById('datefrom').value
   const dateTo = document.getElementById('dateto').value
   const disciplina = document.getElementById('disciplina').value
@@ -37,15 +43,49 @@ axios.get(`/info?dateto=${newDateTo}&datefrom=${dateFrom}&disciplina=${disciplin
 .then((data)=>{
   const datos = data.data
 
- array1 = []
- array2 = []
+ let array1 = []
+ let array2 = []
 
 
 datos.forEach(elemento =>{
-  if(elemento.ejercise[disciplina][1] == "1"){
-    array1.push(parseInt(elemento.ejercise[disciplina][0]))
+
+if(Object.keys(elemento.ejercise)[0] == "aerobica"){
+  if(elemento.ejercise[disciplina][1] == 5){ 
+    array1.push(elemento.ejercise[disciplina][0])
     array2.push(elemento.date.split("T")[0])
-  }
+    leyenda = "Tiempo"
+  } 
+}
+
+if(Object.keys(elemento.ejercise)[0] == "velocidad"){
+  if(elemento.ejercise[disciplina][1] == 100){ 
+    array1.push(elemento.ejercise[disciplina][0])
+    array2.push(elemento.date.split("T")[0])
+    leyenda = "Tiempo"
+  } 
+}
+
+if(Object.keys(elemento.ejercise)[0] === "resistencia" && elemento.ejercise[disciplina][0] == 5){
+
+
+  array1.push(elemento.ejercise[disciplina][1])
+  array2.push(elemento.date.split("T")[0])
+  leyenda = "Repeticiones"
+
+}
+
+
+if( (Object.keys(elemento.ejercise)[0] === "pressBanca" ||
+  Object.keys(elemento.ejercise)[0] === "dominadas" ||
+  Object.keys(elemento.ejercise)[0] === "pressMilitar" ||
+  Object.keys(elemento.ejercise)[0] === "sentadilla" ||
+  Object.keys(elemento.ejercise)[0] === "pesomuerto") &&
+  elemento.ejercise[disciplina][1] == "1"
+   ){
+ array1.push(parseInt(elemento.ejercise[disciplina][0]))
+    array2.push(elemento.date.split("T")[0])
+    leyenda = "Peso Max"
+   }
 })
 
 pintarChart(array1,array2)
@@ -64,7 +104,7 @@ var myChart = new Chart(ctx, {
     data: {
         labels: array2,
         datasets: [{
-            label: 'Peso Max',
+            label: leyenda,
             data: array1,
             backgroundColor: [
                 'rgba(155, 99, 132, 0.2)'

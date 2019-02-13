@@ -1,5 +1,9 @@
-<form action="/add-train" method="POST" id="formAdd">
+{{> menu}}
 
+
+    
+<form action="/add-train" method="POST" id="formAdd">
+ <div class="row">
   <select id="ejercise">
     <option value="dominadas">Dominadas</option>
     <option value="pressBanca">Press Banca</option>
@@ -11,10 +15,18 @@
     <option value="aerobica">Resistencia Aerobica</option>
 
   </select>
-  <input type="button" name="insert" id="insert" value="Insert">
-  <input type="submit" value="Send" id="send">
-</form>
+  </div>
+<button type="button" class="btn btn-secondary btn-lg btn-block">Insert</button>
+<button type="button" class="btn btn-secondary">Send</button>
 
+  <div class="row">
+  <input type="button" name="insert" id="insert" value="Insert">
+  </div>
+  <div class="row">
+
+  <input type="submit" value="Send" id="send">
+  </div>
+</form>
 <script>
 
 
@@ -36,7 +48,7 @@
     parameter1.className = select.value
 
      parameter1.name = select.value + String(inputs.length-2)
-    parameter1.size = 2
+    parameter1.size = 3
 
     let repText = document.createElement('strong')
 
@@ -49,7 +61,8 @@
 
     if (select.value === "velocidad") {
 
-
+      let adviceVel = document.createElement('strong')
+      adviceVel.innerHTML = "<p>Tiempo en segundos</p>"
       let nameParameter1 = document.createElement('strong')
       nameParameter1.innerHTML = "Tiempo: "
       formAdd.appendChild(nameParameter1)
@@ -58,9 +71,12 @@
       repText.innerHTML = " Metros: "
       formAdd.appendChild(repText)
       formAdd.appendChild(repes)
+      formAdd.appendChild(adviceVel)
 
     } else if (select.value === "aerobica") {
 
+       let advice = document.createElement('strong')
+      advice.innerHTML = "<p>Formato XX:XX, correr mas de 1 hora hace llorar al niño jesus</p>"
       let nameParameter1 = document.createElement('strong')
       nameParameter1.innerHTML = "Tiempo: "
       formAdd.appendChild(nameParameter1)
@@ -70,6 +86,7 @@
       repText.innerHTML = " Kilometros: "
       formAdd.appendChild(repText)
       formAdd.appendChild(repes)
+      formAdd.appendChild(advice)
 
     } else {
      
