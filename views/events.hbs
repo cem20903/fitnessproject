@@ -10,7 +10,7 @@
   function searchEvents(){
     let city = document.getElementById("city").value 
     let country = document.getElementById("country").value 
-    axios.get("http://localhost:4015/events/axios?city=" + city + "&country=" + country)
+    axios.get(`${process.env.ROUTE_HEROKU}/events/axios?city=${city}&country=${country}`)
     .then(data => {
       console.log(data)
       let div = document.getElementById("container")
