@@ -1,3 +1,5 @@
+{{> menu}}
+
 <h1>RANKINGS</h1>
 <select id="rankingSelector" onchange="findGroup()">
   <option id="gobal" value="global">global</option>
@@ -15,9 +17,9 @@
   <option value="resistencia">Resistencia Muscular</option>
   <option value="aerobica">Resistencia Aerobica</option>
 </select>
-<form id="ranking">
+<div id="ranking">
 
-</form>
+</div>
 <script>
   function findGroup(){
     let selG = document.getElementById('rankingSelector')
@@ -32,15 +34,26 @@
       while (form.lastChild) {
         form.removeChild(form.lastChild);
       }
+ let ul = document.createElement("ul")
+ ul.className = "list-group"
+      let liPrin = document.createElement('li')
+    
+      liPrin.className = "list-group-item active"
+      liPrin.innerText = "Ranking"
+      ul.appendChild(liPrin)
       for(var i=0;i < data.data.length;i++){
-        let div = document.createElement("div")
-        let name = document.createElement("label")
-        let nota = document.createElement("label")
-        name.innerText = data.data[i].name
-        nota.innerText = data.data[i].ejer[1]
-        form.appendChild(div)
-        div.appendChild(name)
-        div.appendChild(nota)
+
+       
+        
+        let name = document.createElement("li")
+        name.className = "list-group-item"
+        let nota = document.createElement("div")
+        name.innerHTML = "<strong>Usuario:</strong> " + data.data[i].name + " | <strong>Peso:</strong> " + data.data[i].ejer[0]
+        nota.innerText = data.data[i].ejer[0]
+        //form.appendChild(div)
+        ul.appendChild(name)
+        form.appendChild(ul)
+        //form.appendChild(nota)
       }
     })
     .catch((err)=>{

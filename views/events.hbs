@@ -1,3 +1,5 @@
+{{> menu}}
+
 <label>City</label>
 <input type="text" id="city" placeholder="city">
 <label>Country</label>
@@ -12,22 +14,27 @@
     .then(data => {
       console.log(data)
       let div = document.getElementById("container")
+      let ul = document.createElement('ul')
+      ul.className = "malditoflex"
+      let liPrincipal = document.createElement('li')
+      liPrincipal.className = "list-group-item active"
+      liPrincipal.innerHTML = "Eventos"
+      ul.appendChild(liPrincipal)
       for(var i = 0; i < data.data.length; i++){
-        const miniDiv = document.createElement("div");
-        div.appendChild(miniDiv)
+        const liCadaUno = document.createElement("li");
+        div.appendChild(liCadaUno)
         const img = document.createElement("img");
+        img.className = "imgEventos"
         const dir = document.createElement("label");
         const name = document.createElement("label");
-        const date = document.createElement("label");
+        const dates = document.createElement("label");
         img.src = data.data[i].logo
-        dir.innerText = data.data[i].dir
-        name.innerText = data.data[i].name
-        date.innerText = data.data[i].date
-        img.setAttribute("class","img");
-        miniDiv.appendChild(img)
-        miniDiv.appendChild(dir)
-        miniDiv.appendChild(name)
-        miniDiv.appendChild(date)
+        dates.innerHTML = "<p><strong> Fecha:</strong>" + data.data[i].dir + "</p><p><strong> Fecha:</strong> " + data.data[i].date + "</p><p><strong> Organizador:</strong> " + data.data[i].name + "</p>"        
+        liCadaUno.className = "list-group-item"
+        liCadaUno.appendChild(dates)
+        liCadaUno.appendChild(img)
+      ul.appendChild(liCadaUno)
+      div.appendChild(ul)
       }
     })
     .catch(err => console.log(err))

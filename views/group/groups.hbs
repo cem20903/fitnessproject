@@ -1,15 +1,23 @@
 {{> menu}}
 
+
+
+<ul class="list-group">
+  <li class="list-group-item active">Your Groups</li>
 {{#each groups}}
-  <div>
-    {{this.name}}
+
+  <li class="list-group-item"> 
+    <div class="flexbox">
+    <p><strong>Group name:</strong> {{this.name}} </p>
     {{#if this.user}}
-      <a href="/group/del/{{this._id}}">Exit group</a>
+      <p> <a href="/group/info/{{this._id}}" class="info" >Info</a></p>
+     <p> <a href="/group/del/{{this._id}}" class="exit" >Exit group</a></p>
     {{else}}
-      <a href="/group/add/{{this._id}}">Enter group</a>
+      <a class="btn" href="/group/add/{{this._id}}">Enter group</a>
     {{/if}}
-    <a href="/group/info/{{this._id}}">Info</a>
-    
-  </div>
+   </div>
+    </li>
+
 {{/each}}
-<div><a href="/group/new">New group</a></div> 
+<a class="btn btn-success" href="/group/new">New group</a>
+</ul>
