@@ -5,44 +5,40 @@ body {
 a {
   color: #00B7FF; }
 
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
-#selectEjercise{
-  margin-top:20px;
-  margin-bottom:20px;
-  height:30px;
-}
+a {
+  color: #00B7FF; }
 
+#selectEjercise {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 30px; }
 
-.titleEj{
-  margin:10px;
-  text-align:center;
-}
+.titleEj {
+  margin: 10px;
+  text-align: center; }
 
-#formAdd input{
-  margin:20px
-}
+#formAdd input {
+  margin: 20px; }
 
-#formAdd strong{
-  text-align:center;
-  display:block;
-  font-size: 20px;
-}
+#formAdd strong {
+  text-align: center;
+  display: block;
+  font-size: 20px; }
 
-.menu{
-  margin-bottom:15px;
-}
+.menu {
+  margin-bottom: 15px; }
 
-.flexbox{
+.flexbox {
   display: flex;
-  justify-content: space-between;
-}
+  justify-content: space-between; }
 
-/* .flexbox a{
-  justify-content: space-between;
-} */
-
-/* .info, .exit{
-  margin-left:40%;
-} */
+#ranking {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around; }
 
 /*# sourceMappingURL=style.css.map */

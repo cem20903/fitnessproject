@@ -6,3 +6,49 @@ body {
 a {
   color: #00B7FF;
 }
+
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+
+a {
+  color: #00B7FF; }
+
+
+#selectEjercise{
+  margin-top:20px;
+  margin-bottom:20px;
+  height:30px;
+}
+
+
+.titleEj{
+  margin:10px;
+  text-align:center;
+}
+
+#formAdd input{
+  margin:20px
+}
+
+#formAdd strong{
+  text-align:center;
+  display:block;
+  font-size: 20px;
+}
+
+.menu{
+  margin-bottom:15px;
+}
+
+.flexbox{
+  display: flex;
+  justify-content: space-between;
+}
+
+#ranking{
+  margin-top:20px;
+  display: flex;
+  justify-content: space-around;
+  
+}
