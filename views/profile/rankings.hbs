@@ -17,6 +17,9 @@
   <option value="resistencia">Resistencia Muscular</option>
   <option value="aerobica">Resistencia Aerobica</option>
 </select>
+<form id="ranking">
+
+</form>
 <script>
   function findGroup(){
     let selG = document.getElementById('rankingSelector')
@@ -25,8 +28,22 @@
     let ejType = selE.value;
     axios.get(`/profile/searchRanking?id=${groupId}&type=${ejType}`)
     .then((data)=>{
-        console.log(data.data)
-        const datos = data.data
+      console.log(data.data)
+      const datos = data.data
+      let form = document.getElementById('ranking')
+      while (form.lastChild) {
+        form.removeChild(form.lastChild);
+      }
+      for(var i=0;i < data.data.length;i++){
+        let div = document.createElement("div")
+        let name = document.createElement("label")
+        let nota = document.createElement("label")
+        name.innerText = data.data[i].name
+        nota.innerText = data.data[i].ejer[1]
+        form.appendChild(div)
+        div.appendChild(name)
+        div.appendChild(nota)
+      }
     })
     .catch((err)=>{
       console.log(err)

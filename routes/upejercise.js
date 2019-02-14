@@ -3,11 +3,13 @@ const router  = express.Router();
 const ejerciseModel = require("../models/ejercise")
 const User = require("../models/users.js")
 
-router.get('/upejercise', (req, res, next) => {
+const { ensureLoggedIn, ensureLoggedOut } = require('connect-ensure-login');
+
+router.get('/upejercise',ensureLoggedIn('/login'), (req, res, next) => {
   res.render('ejercise/uptrain')
 });
 
-router.post('/add-train',(req,res,next)=>{
+router.post('/add-train',ensureLoggedIn('/login'),(req,res,next)=>{
   let array = []
   const ejercises = req.body
 

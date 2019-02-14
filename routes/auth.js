@@ -25,7 +25,7 @@ router.post("/login", passport.authenticate("local", {
 router.post('/signup', (req, res, next) => {
   const hash = bcrypt.hashSync(req.body.password, salt);
   User.create({username:req.body.username,email:req.body.email,password: hash})
-  .then(user => res.redirect("/login"))
+  .then(user => res.redirect("/profile"))
   .catch(err=> console.log(err))
 });
 
