@@ -1,0 +1,16 @@
+<label>City</label>
+<input type="text" id="city" placeholder="city">
+<label>Country</label>
+<input type="text" id="country" placeholder="country">
+<button onclick="searchEvents()">Search</button>
+
+<script>
+  function searchEvents(){
+    let city = document.getElementById("city").value 
+    let country = document.getElementById("country").value 
+    axios.get("http://localhost:4015/events/axios")
+    .then(data => console.log(data))
+    .catch(err => console.log(err))
+  }
+
+</script>

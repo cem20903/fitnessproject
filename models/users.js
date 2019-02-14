@@ -6,7 +6,6 @@ const userSchema = Schema({
   email: String,
   password: String,
   practicSport: Array,
-  training: String,
   groups: Array,
   ejercise: [{type: Schema.Types.ObjectId, ref:"ejercise" }]
 })

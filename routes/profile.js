@@ -4,11 +4,13 @@ const User = require("../models/users.js")
 const Group = require("../models/groups.js")
 const Ejercise = require("../models/ejercise.js")
 
-router.get('/', (req, res, next) => {
+const { ensureLoggedIn, ensureLoggedOut } = require('connect-ensure-login');
+
+router.get('/',ensureLoggedIn('/login'), (req, res, next) => {
   res.render('profile/info');
 });
 
-router.get('/rankings', (req, res, next) => {
+router.get('/rankings',ensureLoggedIn('/login'), (req, res, next) => {
   Group.find({members:req.user._id})
   .then(groups => res.render('profile/rankings',{groups}))
   .catch(err => console.log(err))
@@ -16,7 +18,7 @@ router.get('/rankings', (req, res, next) => {
 
 router.get("/searchRanKing", (req,res,next) => {
   let findId = {}
-  let sort1 = `ejercise.${req.query.type}.1` 
+  let sort1 = `ejercise.${req.query.type}.0` 
   if(req.query && req.query.id != "global") findId = {groups: req.query.id}
   User.find(findId)
   .then(users =>{
@@ -27,11 +29,11 @@ router.get("/searchRanKing", (req,res,next) => {
     .then(ejer => {
       let checkIds = []
       ejer.forEach(elem => {
-        if(checkIds.indexOf(elem.userid) == -1){
+        if(checkIds.indexOf(elem.userid) == -1 && elem.ejercise[req.query.type][1] == 1){
           for(var j = 0; j < users.length; j++){
             if(users[j]._id == elem.userid){
               checkIds.push(elem.userid)
-              resArr.push({name: users[j].username, userId: elem.userid, ejer: elem.ejercise})
+              resArr.push({name: users[j].username, userId: elem.userid, ejer: elem.ejercise[req.query.type]})
             }
           }
         }
