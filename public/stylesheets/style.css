@@ -41,4 +41,18 @@ a {
   display: flex;
   justify-content: space-around; }
 
+.imgEventos {
+  width: 100px;
+  height: 100px;
+  text-align: right;
+  align-content: right; }
+
+#city {
+  margin-top: 10px;
+  margin-bottom: 20px; }
+
+.malditoflex li {
+  display: flex;
+  justify-content: space-between; }
+
 /*# sourceMappingURL=style.css.map */

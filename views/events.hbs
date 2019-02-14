@@ -1,15 +1,42 @@
+{{> menu}}
+
 <label>City</label>
 <input type="text" id="city" placeholder="city">
 <label>Country</label>
 <input type="text" id="country" placeholder="country">
 <button onclick="searchEvents()">Search</button>
-
+<div id="container"></div>
 <script>
   function searchEvents(){
     let city = document.getElementById("city").value 
     let country = document.getElementById("country").value 
-    axios.get("http://localhost:4015/events/axios")
-    .then(data => console.log(data))
+    axios.get("http://localhost:4015/events/axios?city=" + city + "&country=" + country)
+    .then(data => {
+      console.log(data)
+      let div = document.getElementById("container")
+      let ul = document.createElement('ul')
+      ul.className = "malditoflex"
+      let liPrincipal = document.createElement('li')
+      liPrincipal.className = "list-group-item active"
+      liPrincipal.innerHTML = "Eventos"
+      ul.appendChild(liPrincipal)
+      for(var i = 0; i < data.data.length; i++){
+        const liCadaUno = document.createElement("li");
+        div.appendChild(liCadaUno)
+        const img = document.createElement("img");
+        img.className = "imgEventos"
+        const dir = document.createElement("label");
+        const name = document.createElement("label");
+        const dates = document.createElement("label");
+        img.src = data.data[i].logo
+        dates.innerHTML = "<p><strong> Fecha:</strong>" + data.data[i].dir + "</p><p><strong> Fecha:</strong> " + data.data[i].date + "</p><p><strong> Organizador:</strong> " + data.data[i].name + "</p>"        
+        liCadaUno.className = "list-group-item"
+        liCadaUno.appendChild(dates)
+        liCadaUno.appendChild(img)
+      ul.appendChild(liCadaUno)
+      div.appendChild(ul)
+      }
+    })
     .catch(err => console.log(err))
   }
 
