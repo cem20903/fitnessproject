@@ -5,7 +5,7 @@ const axios = require("axios")
     
 /* GET home page */
 router.get('/', (req, res, next) => {
-  res.render('events');
+  res.render('events', {key:process.env.ROUTE_HEROKU});
 });
 router.get('/axios', (req, res, next) => {
   axios.get("http://api.amp.active.com/v2/search/?city="+req.query.city+"&country="+req.query.country+"&current_page=1&per_page=5&sort=distance&exclude_children=true&api_key="+process.env.ACCESSTOKEN, { headers: {'Access-Control-Allow-Origin': "http://www.active.com"}})

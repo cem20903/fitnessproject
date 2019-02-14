@@ -34,7 +34,9 @@ server.on('error', error => {
       break;
     case 'EADDRINUSE':
       console.error(`Port ${process.env.PORT} is already in use`);
-      process.exit(1);
+      process.on("SIGINT", () => {
+        process.exit();
+      })
       break;
     default:
       throw error;
