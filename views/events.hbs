@@ -12,7 +12,6 @@
     let country = document.getElementById("country").value 
     axios.get(`{{key}}/events/axios?city=${city}&country=${country}`)
     .then(data => {
-      console.log(data)
       let div = document.getElementById("container")
       let ul = document.createElement('ul')
       ul.className = "malditoflex"
