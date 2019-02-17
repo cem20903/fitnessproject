@@ -5,7 +5,7 @@
 <h2>Evolution</h2>
 
 
-From: <input id="datefrom" type="date" name="from"> To:<input id="dateto" type="date" name="to">
+From: <input id="datefrom" value="2019-01-01" type="date" name="from"> To:<input id="dateto" type="date" name="to" value="2019-12-31">
  <select id="disciplina">
     <option value="dominadas">Dominadas</option>
     <option value="pressBanca">Press Banca</option>
@@ -45,6 +45,7 @@ axios.get(`/info?dateto=${newDateTo}&datefrom=${dateFrom}&disciplina=${disciplin
 
  let array1 = []
  let array2 = []
+ let limite = []
 
 
 datos.forEach(elemento =>{
@@ -84,11 +85,13 @@ if( (Object.keys(elemento.ejercise)[0] === "pressBanca" ||
    ){
  array1.push(parseInt(elemento.ejercise[disciplina][0]))
     array2.push(elemento.date.split("T")[0])
+    
+  limite.push(78)
     leyenda = "Peso Max"
    }
 })
 
-pintarChart(array1,array2)
+pintarChart(array1,array2,limite)
 
 })
 .catch((err)=>{
@@ -96,25 +99,27 @@ pintarChart(array1,array2)
 })
 
 
-function pintarChart(array1,array2){
+function pintarChart(array1,array2,limite){
 
 var ctx = document.getElementById("chart").getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'line',
-    data: {
-        labels: array2,
-        datasets: [{
-            label: leyenda,
-            data: array1,
-            backgroundColor: [
-                'rgba(155, 99, 132, 0.2)'
-            ],
-            borderColor: [
-                'rgba(155,99,132,1)'
-            ],
-            borderWidth: 1
-        }]
-    },
+   data: {
+    labels: array2,
+    datasets: [{ 
+        data: array1,
+        label: "Peso",
+        borderColor: "#3e95cd",
+        fill: false
+      }, { 
+        data: limite,
+        label: "Limite",
+        borderColor: "#8e5ea2",
+        fill: false
+      }
+    ]
+  },
+    
     options: {
         scales: {
             yAxes: [{

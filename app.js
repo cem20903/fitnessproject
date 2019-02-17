@@ -18,9 +18,8 @@ const fs = require('fs');
 hbs.registerPartials(__dirname + '/views/partials');
 
 
-
 mongoose
-  .connect(`${process.env.DB_URL}`, {useNewUrlParser: true})
+  .connect('mongodb://localhost/fitnessproject', {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })

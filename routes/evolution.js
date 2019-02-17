@@ -8,7 +8,8 @@ router.get('/info', (req,res,next)=>{
   const from = req.query.datefrom.toString()
   const to = req.query.dateto.toString()
 
-  console.log(to)
+
+
   
   const disciplina = `ejercise.${req.query.disciplina}`
 
