@@ -15,6 +15,7 @@ From: <input id="datefrom" value="2019-01-01" type="date" name="from"> To:<input
     <option value="velocidad">Velocidad</option>
     <option value="resistencia">Resistencia Muscular</option>
     <option value="aerobica">Resistencia Aerobica</option>
+    <option value="peso">Peso</option>
   </select>
 
 <button id="dates">Aceptar</button>
@@ -41,13 +42,16 @@ let newDateTo = dateTo + " 23:59:59"
 
 axios.get(`/info?dateto=${newDateTo}&datefrom=${dateFrom}&disciplina=${disciplina}`)
 .then((data)=>{
-  const datos = data.data
-
+  
+  let datos = data.data
+   
  let array1 = []
  let array2 = []
  let limite = []
+  
+  if(datos.weight == undefined){
 
-
+  
 datos.forEach(elemento =>{
 
 if(Object.keys(elemento.ejercise)[0] == "aerobica"){
@@ -67,14 +71,10 @@ if(Object.keys(elemento.ejercise)[0] == "velocidad"){
 }
 
 if(Object.keys(elemento.ejercise)[0] === "resistencia" && elemento.ejercise[disciplina][0] == 5){
-
-
   array1.push(elemento.ejercise[disciplina][1])
   array2.push(elemento.date.split("T")[0])
   leyenda = "Repeticiones"
-
 }
-
 
 if( (Object.keys(elemento.ejercise)[0] === "pressBanca" ||
   Object.keys(elemento.ejercise)[0] === "dominadas" ||
@@ -84,12 +84,24 @@ if( (Object.keys(elemento.ejercise)[0] === "pressBanca" ||
   elemento.ejercise[disciplina][1] == "1"
    ){
  array1.push(parseInt(elemento.ejercise[disciplina][0]))
-    array2.push(elemento.date.split("T")[0])
-    
+array2.push(elemento.date.split("T")[0]) 
   limite.push(78)
     leyenda = "Peso Max"
    }
+
+
 })
+  } else {
+
+    data.data.weight.forEach(elemento=>{
+      array1.push(elemento.weight)
+      array2.push(elemento.date)
+      limite.push(75)
+    })
+
+  }
+
+
 
 pintarChart(array1,array2,limite)
 
@@ -97,7 +109,6 @@ pintarChart(array1,array2,limite)
 .catch((err)=>{
   console.log(err)
 })
-
 
 function pintarChart(array1,array2,limite){
 
