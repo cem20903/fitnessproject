@@ -32,7 +32,7 @@ const button = document.getElementById('dates')
   var array2 = [];
 button.onclick = ()=>{
 
-  console.log("as")
+ 
 
   let leyenda = ""
 
@@ -45,6 +45,7 @@ let newDateTo = dateTo + " 23:59:59"
 axios.get(`/info?dateto=${newDateTo}&datefrom=${dateFrom}&disciplina=${disciplina}`)
 .then((data)=>{
   
+  console.log(data)
   let datos = data.data
    
  let array1 = []
