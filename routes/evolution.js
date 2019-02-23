@@ -24,6 +24,8 @@ router.post('/weight',(req,res,next)=>{
 })
 
 router.get('/weightEvo',(req,res,next)=>{
+
+  console.log("asdf")
   
   user.findById(req.user._id)
   .then(data=>{
