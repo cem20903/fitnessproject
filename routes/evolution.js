@@ -15,7 +15,7 @@ router.post('/weight',(req,res,next)=>{
   req.query.weight = parseFloat(req.query.weight)
   let id = req.query._id
   let newWeight = req.query
-  console.log(req.query)
+  
   
   user.findByIdAndUpdate(req.user._id, { $push: { weight:  newWeight  } })
   .then(data=>{
