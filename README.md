@@ -5,11 +5,26 @@ FUTURAS MEJORAS:
   - Pagina para añadir peso y % de grasa corporal.
   - Poder añadir entrenamientos por fecha.
   - Visualizar todos los entrenamientos.
-  - 
+  - Definir objetivos IRONFIT.
   
+  ERRORES A SOLUCIONAR:
   
+  - EVOLUTION: Dominadas y Sentadilla
 
+  GRUPOS:
   
+  - Listado grupos para poder añadirte.
+  - Añadir usuarios a grupos.
+  - Grupos publicos o privados.
+  
+  RANKING:
+  
+  - ¿?
+  
+  EVOLUTION:
+  
+  - Objetivo en linea puntuada.
+  - Objetivos calculados automaticamente.
 
 
 IronFIT 1.1
