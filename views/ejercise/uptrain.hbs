@@ -4,7 +4,9 @@
     
 <form action="/add-train" method="POST" id="formAdd">
 
+<input type="date" name="date" id="date">
  <div class="row" id="selectEjercise">
+   
   <select id="ejercise" class="btn-block">
     <option value="dominadas">Dominadas</option>
     <option value="pressBanca">Press Banca</option>
@@ -25,10 +27,17 @@
 <script>
 
 
+  
+  const select = document.getElementById('ejercise')
+  const insert = document.getElementById('insert')
+  const formAdd = document.getElementById('formAdd')
 
-  let select = document.getElementById('ejercise')
-  let insert = document.getElementById('insert')
-  let formAdd = document.getElementById('formAdd')
+  let date = document.getElementById('date')
+  date.value = new Date().toISOString().slice(0,10);
+
+  //let date = document.getElementById('date')
+  //const todayDate = new Date().toISOString().slice(0,10);
+  //date.defaultValue = todayDate 
 
   insert.addEventListener('click', (e) => {
 
@@ -99,6 +108,7 @@
       formAdd.appendChild(parameter1)
       formAdd.appendChild(repText)
       formAdd.appendChild(repes)
+
     }
 
 

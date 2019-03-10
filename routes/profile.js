@@ -16,6 +16,30 @@ router.get('/rankings',ensureLoggedIn('/login'), (req, res, next) => {
   .catch(err => console.log(err))
 });
 
+
+router.get('/profile',(req,res,next)=>{
+
+  let goalWeight = req.user.goalWeight
+  let weight = req.user.weight
+  let actualWeight = weight[weight.length-1].weight
+  let dateActualWeight = weight[weight.length-1].date
+ 
+ 
+ 
+  res.render('profile/settings',{goalWeight: goalWeight,weight: actualWeight,dateActualWeight: dateActualWeight})
+
+})
+
+router.post('/updateGoal',(req,res,next)=>{
+  User.findByIdAndUpdate(req.user._id,{goalWeight: req.body.goalWeight})
+  .then((data)=>{
+    
+     res.redirect('profile')
+  })
+
+})
+
+
 router.get("/searchRanKing", (req,res,next) => {
   let findId = {}
   let sort1 = `ejercise.${req.query.type}.0` 

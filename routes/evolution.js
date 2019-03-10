@@ -10,7 +10,6 @@ res.render('profile/weight')
 })
 
 router.post('/weight',(req,res,next)=>{
-
  
   req.query.weight = parseFloat(req.query.weight)
   let id = req.query._id

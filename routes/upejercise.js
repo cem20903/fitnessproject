@@ -11,7 +11,9 @@ router.get('/upejercise', ensureLoggedIn('/login'), (req, res, next) => {
 
 router.post('/add-train', ensureLoggedIn('/login'), (req, res, next) => {
   let array = []
+  console.log(req.body)
   const ejercises = req.body
+
 
   for (const nom in ejercises) {
     //Al nombre le quito el numero
@@ -22,14 +24,13 @@ router.post('/add-train', ensureLoggedIn('/login'), (req, res, next) => {
 
         ejercises[nom][0] = +ejercises[nom][0].replace(":", ".")
         ejercises[nom][1] = +ejercises[nom][1]
-        console.log(ejercises[nom])
       }
     }
     else{
       ejercises[nom][0] = +ejercises[nom][0]
       ejercises[nom][1] = +ejercises[nom][1]
     }
-    array.push({ userid: req.user.id, ejercise: { [nombre]: ejercises[nom] } })
+    array.push({ userid: req.user.id, ejercise: { [nombre]: ejercises[nom] },date:req.body.date})
 
   }
   ejerciseModel.insertMany(array)

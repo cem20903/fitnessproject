@@ -12,5 +12,6 @@ router.use('/profile', require('./profile'));
 router.use('/group', require('./groups'));
 router.use('/events', require('./events'));
 router.use('/',require('./evolution'))
+router.use('/training',require('./training'))
 
 module.exports = router;

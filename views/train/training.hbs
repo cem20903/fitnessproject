@@ -1,0 +1,50 @@
+{{>menu}}
+
+<div id="train"></div>
+
+
+<script>
+
+var train = document.getElementById("train")
+axios.post('/training')
+.then(data=>{
+let datos = data.data
+   let dataArray = datos.map((train)=>{
+     return train.date.split("T")[0]
+  }) 
+
+  uniqueArray = dataArray.filter(function(item, pos, self) {
+    return self.indexOf(item) == pos;
+})
+console.log(uniqueArray)
+uniqueArray.forEach(ent=>{
+  train.innerHTML +=`<p>${ent}</p>`
+  datos.forEach(entrenamiento=>{
+  
+    if(ent === entrenamiento.date.split("T")[0] ){
+       for(var propName in entrenamiento.ejercise) {
+    if(entrenamiento.ejercise.hasOwnProperty(propName)) {
+        var propValue = entrenamiento.ejercise[propName];
+        
+       var peso = propValue[0]
+       var repeticiones = propValue[1]
+    }
+}
+
+if(Object.keys(entrenamiento.ejercise)[0] === "dominadas"){
+}
+   train.innerHTML +=  `<p>${Object.keys(entrenamiento.ejercise)[0]} 
+     Peso: ${peso}
+     Repeticiones: ${repeticiones} 
+   </p>`
+   }
+  })
+
+})
+
+
+
+
+})
+
+</script>
