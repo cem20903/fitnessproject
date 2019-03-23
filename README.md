@@ -1,3 +1,7 @@
+2º Proyecto de Ironhack, esta vez por parejas.
+
+El proyecto como idea es poder ver la evolución en el ejercicio fisico y el peso.
+
 FUTURAS MEJORAS:
 
   - Graficas con peso y % de grasa corporal.
