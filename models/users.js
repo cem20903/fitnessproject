@@ -6,6 +6,8 @@ const userSchema = Schema({
   email: String,
   password: String,
   practicSport: Array,
+  genre: {type: String, enum: ['male', 'female']},
+  records: Object,
   groups: Array,
   weight: Array,
   goalWeight: Number,

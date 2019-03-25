@@ -44,14 +44,14 @@ let newDateTo = dateTo + " 23:59:59"
 
 axios.get(`/info?dateto=${newDateTo}&datefrom=${dateFrom}&disciplina=${disciplina}`)
 .then((data)=>{
-  
-  console.log(data)
+
   let datos = data.data
    
  let array1 = []
  let array2 = []
  let limite = []
-  
+ 
+
   if(datos.weight == undefined){
 
   
@@ -79,23 +79,25 @@ if(Object.keys(elemento.ejercise)[0] === "resistencia" && elemento.ejercise[disc
   leyenda = "Repeticiones"
 }
 
+if( Object.keys(elemento.ejercise)[0] === "dominadas"){
+   array1.push(parseInt(elemento.ejercise[disciplina][1]))
+array2.push(elemento.date.split("T")[0]) 
+}
+
 if( (Object.keys(elemento.ejercise)[0] === "pressBanca" ||
-  Object.keys(elemento.ejercise)[0] === "dominadas" ||
   Object.keys(elemento.ejercise)[0] === "pressMilitar" ||
   Object.keys(elemento.ejercise)[0] === "sentadilla" ||
-  Object.keys(elemento.ejercise)[0] === "pesomuerto") &&
-  elemento.ejercise[disciplina][1] == "1"
+  Object.keys(elemento.ejercise)[0] === "pesomuerto")
    ){
  array1.push(parseInt(elemento.ejercise[disciplina][0]))
 array2.push(elemento.date.split("T")[0]) 
-  limite.push(78)
     leyenda = "Peso Max"
    }
 
 
 })
   } else {
-
+console.log("asdffffff")
     data.data.weight.forEach(elemento=>{
       array1.push(elemento.weight)
       array2.push(elemento.date)
@@ -124,11 +126,6 @@ var myChart = new Chart(ctx, {
         data: array1,
         label: "Peso",
         borderColor: "#3e95cd",
-        fill: false
-      }, { 
-        data: limite,
-        label: "Limite",
-        borderColor: "#8e5ea2",
         fill: false
       }
     ]

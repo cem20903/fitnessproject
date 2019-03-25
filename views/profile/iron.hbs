@@ -1,0 +1,90 @@
+{{>menu}}
+
+
+<h2>Iron</h2>
+
+<div id="general">
+<div id="nombre">Ejercicio:</div>
+<div id="iron">Ironman:</div>
+<div id="personal">Yo:</div>
+<div id="porcentaje">Porcentaje:</div>
+
+</div>
+<div id="total"></div>
+<script>
+
+
+
+  
+
+window.onload = ()=>{
+let nombre = document.getElementById('nombre')
+let iron = document.getElementById('iron')
+let personal = document.getElementById('personal')
+let porcentaje = document.getElementById('porcentaje')
+let total = document.getElementById('total')
+axios.post('/profile/iron')
+.then(data=>{
+
+let datos = data.data.records
+
+datos.listado.forEach(elemento=>{
+var p = document.createElement('p')
+p.innerText = elemento
+nombre.appendChild(p)
+})
+
+datos.iron.forEach(elemento=>{
+  var p = document.createElement('p')
+p.innerText = elemento
+iron.appendChild(p)
+})
+
+datos.personal.forEach(elemento=>{
+  var p = document.createElement('p')
+p.innerText = elemento
+personal.appendChild(p)
+})
+
+let PPersona = personal.getElementsByTagName('p')
+let PIron = iron.getElementsByTagName('p')
+let PNombre = nombre.getElementsByTagName('p')
+let todosporcentajes = []
+
+for(var a=0;a<PPersona.length;a++){
+
+  var p = document.createElement('p')
+
+if(PNombre[a].innerText === "Peso" || PNombre[a].innerText === "Grasa"  ){
+    var valPorcentaje = parseFloat(PIron[a].innerText) * 100 / parseFloat(PPersona[a].innerText)
+
+} else {
+
+  var valPorcentaje = parseFloat(PPersona[a].innerText) * 100 / parseFloat(PIron[a].innerText)
+}
+  
+  valPorcentaje = valPorcentaje.toFixed(2)
+    p.innerText = valPorcentaje
+    todosporcentajes.push(valPorcentaje)
+    if(valPorcentaje > 50){
+      p.style.backgroundColor = "green"
+    } else {
+            p.style.backgroundColor = "red"
+      
+    }
+      porcentaje.appendChild(p)
+}
+
+todosporcentajes = todosporcentajes.reduce((num1,num2)=>{return parseFloat(num1)+parseFloat(num2)})
+todosporcentajes = (todosporcentajes / PIron.length).toFixed(2)
+total.innerHTML = todosporcentajes
+})
+.catch(err=>console.log(err))
+
+
+
+
+}
+
+
+</script>

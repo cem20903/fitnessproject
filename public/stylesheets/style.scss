@@ -124,3 +124,13 @@ div.mes caption.titulo {
 .objetivo{
   background-color:yellowgreen;
 }
+
+#general{
+  display:flex;
+  padding:15px;
+
+}
+
+#nombre, #iron,#personal,#porcentaje{
+  padding-left:15px;
+}

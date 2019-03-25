@@ -69,9 +69,9 @@ require('./passport')(app);
 const index = require('./routes/index');
 app.use('/', index);
 
-
-app.listen(process.env.PORT,()=>{
-  console.log(`Escuchando en puerto: ${process.env.PORT}`)
+app.listen(4000,()=>{
+  
 })
+
 
 module.exports = app;

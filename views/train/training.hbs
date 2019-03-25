@@ -8,6 +8,7 @@
 var train = document.getElementById("train")
 axios.post('/training')
 .then(data=>{
+  console.log(data)
 let datos = data.data
    let dataArray = datos.map((train)=>{
      return train.date.split("T")[0]
@@ -16,7 +17,7 @@ let datos = data.data
   uniqueArray = dataArray.filter(function(item, pos, self) {
     return self.indexOf(item) == pos;
 })
-console.log(uniqueArray)
+
 uniqueArray.forEach(ent=>{
   train.innerHTML +=`<p>${ent}</p>`
   datos.forEach(entrenamiento=>{

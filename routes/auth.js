@@ -23,8 +23,42 @@ router.post("/login", passport.authenticate("local", {
 }));
 
 router.post('/signup', (req, res, next) => {
+  console.log(req.body)
+
+  let iron = []
+                     
+
+  let {username,email,genre,weight} = req.body
+
+ if(genre === "male"){
+  iron = [+weight,10,weight*0.75,weight*1.8,weight*1.5,200,200,15,25,75,20]
+ } else {
+  iron = [weight*0.5,8,weight*0.35,weight*1.2,weight*0.9,200,200,18,30,75,20]
+
+ }
+ let listado = ["Press banca",
+ "Dominadas",
+ "Press Militar",
+ "Peso Muerto",
+ "Sentadilla",
+ "Sentadilla (R)",
+ "Flexiones (R)",
+ "Velocidad",
+ "Aerobico",
+ "Peso",
+ "Grasa"
+ ]
+ 
+ let records = {
+  listado:listado, 
+  iron:iron,
+ }
+
+  var d = new Date();
+  d = d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2)
+  let completeWeight = [+weight,d]
   const hash = bcrypt.hashSync(req.body.password, salt);
-  User.create({username:req.body.username,email:req.body.email,password: hash})
+  User.create({username,email,password: hash,genre,weight:completeWeight,records})
   .then(user => res.redirect("/profile"))
   .catch(err=> console.log(err))
 });

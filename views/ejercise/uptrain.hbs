@@ -14,7 +14,8 @@
     <option value="sentadilla">Sentadilla</option>
     <option value="pesomuerto">Peso muerto</option>
     <option value="velocidad">Velocidad</option>
-    <option value="resistencia">Resistencia Muscular</option>
+    <option value="flexionesR">Flexiones (R)</option>
+     <option value="sentadillasR">Sentadillas (R)</option>
     <option value="aerobica">Resistencia Aerobica</option>
 
   </select>
@@ -52,8 +53,9 @@
     parameter1.className = "form-control form-control-lg "
     parameter1.value = 0
     //parameter1.className = select.value
-
-     parameter1.name = select.value + String(inputs.length-2)
+//esto select.value + String(inputs.length-1)
+     parameter1.name = select.value
+   
     parameter1.size = 3
 
     let repText = document.createElement('strong')
@@ -62,7 +64,7 @@
     let repes = document.createElement('input')
     //repes.className = select.value 
     repes.className = "form-control form-control-lg "
-    repes.name = select.value + String(inputs.length-2)
+    repes.name = select.value
     repes.value = 0
      let nameParameter1 = document.createElement('strong')
 
@@ -101,7 +103,7 @@
       nameParameter1.innerHTML = "Peso: "
       repes.className += "form-control form-control-lg "
       repes.className += "repeticiones"
-      repes.name = select.value + String(inputs.length-2)
+      repes.name = select.value 
       repes.size = 10
       repText.innerHTML = " Repeticiones: "
       formAdd.appendChild(nameParameter1)
